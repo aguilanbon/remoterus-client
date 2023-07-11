@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signInUser } from "@/lib/constants/api_constants";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -32,6 +33,7 @@ const errorText = (text: String) => {
 
 function SignInForm() {
   const [signInError, setSignInError] = useState("");
+  const router = useRouter();
 
   const signInForm = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,6 +56,7 @@ function SignInForm() {
       setSignInError("Invalid username or password.");
     } else {
       setSignInError("");
+      router.push("/profile");
     }
   };
 
