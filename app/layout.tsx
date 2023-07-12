@@ -13,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-slate-900">{children}</body>
+      <body className="bg-gradient-to-bl from-primary to-slate-900">
+        {children}
+      </body>
     </html>
   );
 }

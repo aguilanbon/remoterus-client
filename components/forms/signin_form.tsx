@@ -55,8 +55,9 @@ function SignInForm() {
     if (data.isError === true) {
       setSignInError("Invalid username or password.");
     } else {
-      setSignInError("");
       router.push("/profile");
+      signInForm.reset();
+      setSignInError("");
     }
   };
 
@@ -66,13 +67,12 @@ function SignInForm() {
       <form
         onChange={() => setSignInError("")}
         onSubmit={signInForm.handleSubmit(handleSignIn)}
-        className="space-y-8"
       >
         <FormField
           control={signInForm.control}
           name="username"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-4">
               <FormLabel>Username or Email</FormLabel>
               <FormControl>
                 <Input placeholder="Username or Email" {...field} />
@@ -88,7 +88,7 @@ function SignInForm() {
           control={signInForm.control}
           name="password"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="mb-6">
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input type="password" placeholder="Password" {...field} />
@@ -100,7 +100,11 @@ function SignInForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Sign in</Button>
+        <div className="w-full flex items-end justify-end">
+          <Button type="submit" className="w-full space-y-4 mb-4">
+            Sign in
+          </Button>
+        </div>
       </form>
     </Form>
   );
