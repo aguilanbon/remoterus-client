@@ -36,7 +36,7 @@ const formSchema = z
     password: z
       .string()
       .nonempty({ message: "Password must not be empty." })
-      .length(8, { message: "Password must be atleast 8 characters." }),
+      .min(8, { message: "Password must be atleast 8 characters." }),
     confirmPassword: z
       .string()
       .nonempty({ message: "Password must not be empty." }),
