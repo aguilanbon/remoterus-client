@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,10 +17,9 @@ import { Input } from "@/components/ui/input";
 import { signInUser } from "@/lib/constants/api_constants";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
-import { ToastAction } from "@radix-ui/react-toast";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -71,7 +69,6 @@ function SignInForm() {
           variant: "default",
           title: "Success!",
           description: "Welcome back! What's up?",
-          // action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       }
     } catch (error) {
@@ -80,7 +77,6 @@ function SignInForm() {
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
-        // action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     }
   };
@@ -101,9 +97,6 @@ function SignInForm() {
               <FormControl>
                 <Input placeholder="Username or Email" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -117,16 +110,13 @@ function SignInForm() {
               <FormControl>
                 <Input type="password" placeholder="Password" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="w-full flex items-end justify-end">
           <Button type="submit" className="w-full space-y-4 mb-4">
-            Sign in
+            Continue
           </Button>
         </div>
       </form>
