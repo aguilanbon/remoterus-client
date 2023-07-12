@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import type { Metadata } from "next";
 
@@ -13,8 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-bl from-primary to-slate-900">
+      <body className="bg-gradient-to-bl from-primary to-blackGround">
         {children}
+        <Toaster />
       </body>
     </html>
   );

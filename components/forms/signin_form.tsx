@@ -17,6 +17,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { signInUser } from "@/lib/constants/api_constants";
 import { useRouter } from "next/navigation";
+import { useToast } from "../ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -25,15 +30,17 @@ const formSchema = z.object({
 
 const errorText = (text: String) => {
   return (
-    <div className="w-full flex items-center justify-center text-red-500 mb-4">
-      {text}
-    </div>
+    <Alert variant="destructive" className="mb-4">
+      <ExclamationTriangleIcon className="h-4 w-4" />
+      <AlertDescription>{text}</AlertDescription>
+    </Alert>
   );
 };
 
 function SignInForm() {
   const [signInError, setSignInError] = useState("");
   const router = useRouter();
+  const { toast } = useToast();
 
   const signInForm = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,20 +51,37 @@ function SignInForm() {
   });
 
   const handleSignIn = async (values: z.infer<typeof formSchema>) => {
-    const res = await fetch(signInUser, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    const data = await res.json();
-    if (data.isError === true) {
-      setSignInError("Invalid username or password.");
-    } else {
-      router.push("/profile");
-      signInForm.reset();
-      setSignInError("");
+    try {
+      const res = await fetch(signInUser, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await res.json();
+      if (data.isError === true) {
+        setSignInError("Invalid username or password.");
+      } else {
+        router.push("/profile");
+        signInForm.reset();
+        setSignInError("");
+        toast({
+          duration: 5000,
+          variant: "default",
+          title: "Success!",
+          description: "Welcome back! What's up?",
+          // action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+      }
+    } catch (error) {
+      toast({
+        duration: 5000,
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        // action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
     }
   };
 
