@@ -28,6 +28,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { SignUpProps } from "@/lib/types/form.types";
+import { registerUser } from "@/lib/constants/api_constants";
 
 const formSchema = z
   .object({
@@ -54,7 +56,6 @@ const formSchema = z
 function SignUpForm() {
   const [signUpError, setSignUpError] = useState("");
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -75,38 +76,41 @@ function SignUpForm() {
       day: "2-digit",
     };
     const formattedDate = values.birthdate.toLocaleDateString("en-US", options);
-    console.log(values);
 
-    // try {
-    //   const res = await fetch(signInUser, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(values),
-    //   });
-    //   const data = await res.json();
-    //   if (data.isError === true) {
-    //     setSignUpError("Invalid username or password.");
-    //   } else {
-    //     router.push("/profile");
-    //     form.reset();
-    //     setSignUpError("");
-    //     toast({
-    //       duration: 5000,
-    //       variant: "default",
-    //       title: "Success!",
-    //       description: "Welcome back! What's up?",
-    //     });
-    //   }
-    // } catch (error) {
-    //   toast({
-    //     duration: 5000,
-    //     variant: "destructive",
-    //     title: "Uh oh! Something went wrong.",
-    //     description: "There was a problem with your request.",
-    //   });
-    // }
+    const payload: SignUpProps = {
+      username: values.username,
+      email: values.email,
+      authentication: {
+        password: values.password,
+      },
+      personalInformation: {
+        name: {
+          first: values.firstName,
+          last: values.lastName,
+        },
+        birthdate: formattedDate,
+      },
+    };
+
+    try {
+      const res = await fetch(registerUser, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      console.log(data);
+
+      if (data.isError === true) {
+        setSignUpError(data.message);
+      } else {
+        router.push("/profile");
+        form.reset();
+        setSignUpError("");
+      }
+    } catch (error) {}
   };
   return (
     <div className="w-full">
