@@ -53,6 +53,13 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
+const toDate = new Date();
+const fromDate = new Date(
+  toDate.getFullYear() - 100,
+  toDate.getMonth(),
+  toDate.getDate()
+);
+
 function SignUpForm() {
   const [signUpError, setSignUpError] = useState("");
   const router = useRouter();
@@ -226,7 +233,7 @@ function SignUpForm() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="birthdate"
                 render={({ field }) => (
@@ -270,6 +277,52 @@ function SignUpForm() {
                     <FormDescription>
                       Your date of birth is used to calculate your age.
                     </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              /> */}
+              <FormField
+                control={form.control}
+                name="birthdate"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Birth date</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "md:w-72 sm:64 pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value ? field.value : undefined}
+                          onSelect={(date: Date | undefined) => {
+                            if (date) field.onChange(date);
+                          }}
+                          defaultMonth={field.value ? field.value : undefined}
+                          disabled={(date: Date) => date > new Date()}
+                          initialFocus
+                          captionLayout="dropdown-buttons"
+                          fromDate={fromDate}
+                          toDate={toDate}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormDescription>A sample date of sorts.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
