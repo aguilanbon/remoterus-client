@@ -1,5 +1,6 @@
+"use client";
+
 import SignInForm from "@/components/forms/signin_form";
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -8,8 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Car } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SignUpForm from "@/components/forms/signup_form";
 
 export default function Home() {
   return (
@@ -40,6 +41,7 @@ export default function Home() {
                   Create your account.
                 </CardTitle>
                 {/* Sign up Form */}
+                <SignUpForm />
               </TabsContent>
             </CardContent>
           </Tabs>
