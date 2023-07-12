@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen">
       <div className="w-full h-screen flex items-center justify-center">
-        <Card className="w-96">
+        <Card className="w-auto">
           <Tabs defaultValue="signin">
             <CardHeader>
               <TabsList className="w-full">

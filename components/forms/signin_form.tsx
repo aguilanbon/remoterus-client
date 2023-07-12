@@ -71,7 +71,7 @@ function SignInForm() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-96">
       <Form {...form}>
         {signInError !== "" ? errorText(signInError) : <></>}
         <form
