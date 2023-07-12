@@ -121,7 +121,7 @@ function SignUpForm() {
           onSubmit={form.handleSubmit(handleSignUp)}
           className="flex flex-col"
         >
-          <div className="w-full flex flex-row">
+          <div className="w-full flex sm:flex-row flex-col">
             <div className="flex flex-col">
               <FormField
                 control={form.control}
@@ -131,7 +131,7 @@ function SignUpForm() {
                     <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input
-                        className="w-72"
+                        className="md:w-72 sm:64"
                         placeholder="Username"
                         {...field}
                       />
@@ -161,6 +161,7 @@ function SignUpForm() {
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
+                        className="md:w-72 sm:64"
                         type="password"
                         placeholder="Password"
                         {...field}
@@ -174,10 +175,11 @@ function SignUpForm() {
                 control={form.control}
                 name="confirmPassword"
                 render={({ field }) => (
-                  <FormItem className="mb-6">
-                    <FormLabel>Password</FormLabel>
+                  <FormItem className="mb-4">
+                    <FormLabel>Confirm password</FormLabel>
                     <FormControl>
                       <Input
+                        className="md:w-72 sm:64"
                         type="password"
                         placeholder="Confirm password"
                         {...field}
@@ -198,7 +200,7 @@ function SignUpForm() {
                     <FormLabel>First name</FormLabel>
                     <FormControl>
                       <Input
-                        className="w-72"
+                        className="md:w-72 sm:64"
                         placeholder="First name"
                         {...field}
                       />
@@ -215,7 +217,7 @@ function SignUpForm() {
                     <FormLabel>Last name</FormLabel>
                     <FormControl>
                       <Input
-                        className="w-72"
+                        className="md:w-72 sm:64"
                         placeholder="Last name"
                         {...field}
                       />
@@ -236,7 +238,7 @@ function SignUpForm() {
                           <Button
                             variant={"outline"}
                             className={cn(
-                              "w-[240px] pl-3 text-left font-normal",
+                              "md:w-72 sm:64 pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -274,8 +276,8 @@ function SignUpForm() {
               />
             </div>
           </div>
-          <div className="w-full flex items-end justify-end">
-            <Button type="submit" className="w-full space-y-4 mb-4">
+          <div className="w-full flex items-end justify-end mt-4">
+            <Button type="submit" className="w-full space-y-4 mb-4 ">
               Sign up
             </Button>
           </div>
