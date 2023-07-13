@@ -18,6 +18,7 @@ import { signInUser } from "@/lib/constants/api_constants";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { errorText } from "../customui/form_error";
+import Spinner from "../customui/spinner";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 
 function SignInForm() {
   const [signInError, setSignInError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -38,6 +40,7 @@ function SignInForm() {
   });
 
   const handleSignIn = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     try {
       const res = await fetch(signInUser, {
         method: "POST",
@@ -60,6 +63,7 @@ function SignInForm() {
           description: "Welcome back! What's up?",
         });
       }
+      setIsLoading(false);
     } catch (error) {
       toast({
         duration: 5000,
@@ -67,6 +71,7 @@ function SignInForm() {
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
       });
+      setIsLoading(false);
     }
   };
 
@@ -106,7 +111,7 @@ function SignInForm() {
           />
           <div className="w-full flex items-end justify-end">
             <Button type="submit" className="w-full space-y-4 mb-4">
-              Continue
+              {isLoading ? <Spinner size="8" color="white" /> : <>Continue</>}
             </Button>
           </div>
         </form>
