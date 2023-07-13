@@ -13,7 +13,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size, color }) => {
         className={`absolute top-0 left-0 flex items-center justify-center w-${size} h-${size}`}
       >
         <div
-          className={`w-${size} h-${size} rounded-full border-4 border-${color} border-t-transparent animate-spin`}
+          className={`w-${size} h-${size} rounded-full border-4 border-white border-t-transparent animate-spin`}
         ></div>
       </div>
     </div>
