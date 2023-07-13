@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { SignUpProps } from "@/lib/types/form.types";
 import { registerUser } from "@/lib/constants/api_constants";
+import Spinner from "../customui/spinner";
 
 const formSchema = z
   .object({
@@ -62,6 +63,7 @@ const fromDate = new Date(
 
 function SignUpForm() {
   const [signUpError, setSignUpError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -77,6 +79,7 @@ function SignUpForm() {
   });
 
   const handleSignUp = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     const options: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "2-digit",
@@ -108,16 +111,18 @@ function SignUpForm() {
         body: JSON.stringify(payload),
       });
       const data = await res.json();
-      console.log(data);
 
       if (data.isError === true) {
         setSignUpError(data.message);
       } else {
-        router.push("/profile");
+        // router.push("/profile");
         form.reset();
         setSignUpError("");
       }
-    } catch (error) {}
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
   return (
     <div className="w-full">
@@ -285,7 +290,7 @@ function SignUpForm() {
           </div>
           <div className="w-full flex items-end justify-end mt-4">
             <Button type="submit" className="w-full space-y-4 mb-4 ">
-              Sign up
+              {isLoading ? <Spinner size="8" color="white" /> : <>Sign up</>}
             </Button>
           </div>
         </form>
