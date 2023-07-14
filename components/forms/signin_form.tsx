@@ -110,7 +110,11 @@ function SignInForm() {
             )}
           />
           <div className="w-full flex items-end justify-end">
-            <Button type="submit" className="w-full space-y-4 mb-4">
+            <Button
+              type="submit"
+              className="w-full space-y-4 mb-4"
+              disabled={isLoading}
+            >
               {isLoading ? <Spinner size="8" color="white" /> : <>Continue</>}
             </Button>
           </div>
