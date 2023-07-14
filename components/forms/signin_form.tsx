@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { errorText } from "../customui/form_error";
 import Spinner from "../customui/spinner";
+import axios from "axios";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -42,14 +43,8 @@ function SignInForm() {
   const handleSignIn = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      const res = await fetch(signInUser, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      const data = await res.json();
+      const res = await axios.post(signInUser, values);
+      const data = res.data;
       if (data.isError === true) {
         setSignInError("Invalid username or password.");
       } else {

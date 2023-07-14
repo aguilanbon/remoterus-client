@@ -31,6 +31,7 @@ import { format } from "date-fns";
 import { SignUpProps } from "@/lib/types/form.types";
 import { registerUser } from "@/lib/constants/api_constants";
 import Spinner from "../customui/spinner";
+import axios from "axios";
 
 const formSchema = z
   .object({
@@ -64,8 +65,6 @@ const fromDate = new Date(
 function SignUpForm() {
   const [signUpError, setSignUpError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -103,19 +102,12 @@ function SignUpForm() {
     };
 
     try {
-      const res = await fetch(registerUser, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
+      const res = await axios.post(registerUser, payload);
+      const data = res.data;
 
       if (data.isError === true) {
         setSignUpError(data.message);
       } else {
-        // router.push("/profile");
         form.reset();
         setSignUpError("");
       }
