@@ -20,6 +20,7 @@ module.exports = {
         'primary': '#1A1A2E',
         'success': '#03C988',
         'blackGround': '#000000',
+        'alt-black': '#161618',
         // 'primary': '#202040'
         // 'primary': '#000000'
       },
