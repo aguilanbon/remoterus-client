@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-bl from-primary to-blackGround">
+      <body className="bg-gradient-to-bl from-primary to-alt-black">
         {children}
         <Toaster />
       </body>
