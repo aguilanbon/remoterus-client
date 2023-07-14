@@ -53,7 +53,7 @@ function SignInForm() {
       if (data.isError === true) {
         setSignInError("Invalid username or password.");
       } else {
-        router.push("/profile");
+        router.push("/home");
         form.reset();
         setSignInError("");
         toast({
