@@ -1,11 +1,9 @@
 import NavigationBar from "@/components/NavigationBar";
-import { NavigationMenuDemo } from "@/components/NavigationMenu";
-import { NavigationMenu } from "@/components/ui/navigation-menu";
 import React from "react";
 
 function HomePage() {
   return (
-    <div className="w-full h-full flex ">
+    <div className="w-full min-h-screen flex flex-col">
       <div className="w-full fixed">
         <NavigationBar />
       </div>
