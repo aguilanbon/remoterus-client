@@ -5,9 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BellIcon, ChatBubbleIcon, RocketIcon } from "@radix-ui/react-icons";
 import { Users } from "lucide-react";
 import GlobalSearch from "./GlobalSearch";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -26,6 +23,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 function NavigationBar() {
   return (
@@ -38,6 +43,7 @@ function NavigationBar() {
       </div>
       <div className="w-full flex items-center justify-end space-x-8">
         <Users className="h-10 w-10 text-white cursor-pointer hover:text-green-300 hover:border-b-2 p-2 hover:border-green-300" />
+        {/* Messages */}
         <Sheet>
           <SheetTrigger asChild>
             <ChatBubbleIcon className="h-10 w-10 text-white cursor-pointer hover:text-green-300 hover:border-b-2 p-2 hover:border-green-300" />
@@ -54,8 +60,20 @@ function NavigationBar() {
             </SheetFooter>
           </SheetContent>
         </Sheet>
-        <BellIcon className="h-10 w-10 text-white cursor-pointer hover:text-green-300 hover:border-b-2 p-2 hover:border-green-300" />
+        {/* Notifications */}
+        <Dialog>
+          <DialogTrigger>
+            <BellIcon className="h-10 w-10 text-white cursor-pointer hover:text-green-300 hover:border-b-2 p-2 hover:border-green-300" />
+          </DialogTrigger>
+          <DialogContent className="bg-alt-black border-0 text-white">
+            <DialogHeader>
+              <DialogTitle>Notifications</DialogTitle>
+              <DialogDescription>See your notifications.</DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
 
+        {/* Avatar */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="border-4 border-green-500 cursor-pointer">
