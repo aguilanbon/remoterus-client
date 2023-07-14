@@ -115,7 +115,7 @@ function SignInForm() {
               className="w-full space-y-4 mb-4"
               disabled={isLoading}
             >
-              {isLoading ? <Spinner size="8" color="white" /> : <>Continue</>}
+              {isLoading ? <Spinner /> : <>Continue</>}
             </Button>
           </div>
         </form>

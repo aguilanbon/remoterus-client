@@ -294,7 +294,7 @@ function SignUpForm() {
               className="w-full space-y-4 mb-4 "
               disabled={isLoading}
             >
-              {isLoading ? <Spinner size="8" color="white" /> : <>Sign up</>}
+              {isLoading ? <Spinner /> : <>Sign up</>}
             </Button>
           </div>
         </form>
