@@ -29,7 +29,7 @@ import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { SignUpProps } from "@/lib/types/form.types";
-import { registerUser } from "@/lib/constants/api_constants";
+import { REGISTER_URL } from "@/lib/constants/api_constants";
 import Spinner from "../customui/spinner";
 import axios from "axios";
 
@@ -102,7 +102,7 @@ function SignUpForm() {
     };
 
     try {
-      const res = await axios.post(registerUser, payload);
+      const res = await axios.post(REGISTER_URL, payload);
       const data = res.data;
 
       if (data.isError === true) {
@@ -135,6 +135,7 @@ function SignUpForm() {
                     <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input
+                        autoFocus
                         className="md:w-72 sm:64"
                         placeholder="Username"
                         {...field}

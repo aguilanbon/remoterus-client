@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signInUser } from "@/lib/constants/api_constants";
+import { SIGNIN_URL } from "@/lib/constants/api_constants";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { errorText } from "../customui/form_error";
@@ -43,7 +43,7 @@ function SignInForm() {
   const handleSignIn = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(signInUser, values);
+      const res = await axios.post(SIGNIN_URL, values);
       const data = res.data;
       if (data.isError === true) {
         setSignInError("Invalid username or password.");
@@ -85,7 +85,7 @@ function SignInForm() {
               <FormItem className="mb-4">
                 <FormLabel>Username or Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Username or Email" {...field} />
+                  <Input autoFocus placeholder="Username or Email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
