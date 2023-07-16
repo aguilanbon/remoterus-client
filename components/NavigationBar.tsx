@@ -34,6 +34,7 @@ import {
 import { User } from "@/lib/types/user.types";
 import { SIGNOUT_URL } from "@/lib/constants/api_constants";
 import { cookies } from "next/dist/client/components/headers";
+import { useRouter } from "next/navigation";
 
 function NavigationBar({
   userDetails,
@@ -53,6 +54,8 @@ function NavigationBar({
       userDetails?.personalInformation.name.last,
   };
 
+  const router = useRouter();
+
   const handleLogout = async () => {
     await fetch(SIGNOUT_URL, {
       method: "POST",
@@ -61,6 +64,7 @@ function NavigationBar({
         Cookie: `jwt=${token}`,
       },
     });
+    router.push("/");
   };
 
   return (
