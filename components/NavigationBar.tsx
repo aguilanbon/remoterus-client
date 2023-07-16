@@ -32,9 +32,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { User } from "@/lib/types/user.types";
-import { Label } from "@radix-ui/react-label";
+import { SIGNOUT_URL } from "@/lib/constants/api_constants";
+import { cookies } from "next/dist/client/components/headers";
 
-function NavigationBar({ userDetails }: { userDetails: User }) {
+function NavigationBar({
+  userDetails,
+  token,
+}: {
+  userDetails: User;
+  token: string;
+}) {
   interface fullName {
     name: string;
   }
@@ -44,6 +51,16 @@ function NavigationBar({ userDetails }: { userDetails: User }) {
       userDetails?.personalInformation.name.first +
       " " +
       userDetails?.personalInformation.name.last,
+  };
+
+  const handleLogout = async () => {
+    await fetch(SIGNOUT_URL, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Cookie: `jwt=${token}`,
+      },
+    });
   };
 
   return (
@@ -107,7 +124,7 @@ function NavigationBar({ userDetails }: { userDetails: User }) {
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>

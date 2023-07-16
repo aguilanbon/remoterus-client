@@ -18,10 +18,12 @@ async function getUserProfile() {
 
 async function HomePage() {
   const data: User = await getUserProfile();
+  const nextCookie = cookies();
+  const jwtCookie = nextCookie.get("jwt");
   return (
     <div className="w-full min-h-screen flex flex-col">
       <div className="w-full fixed">
-        <NavigationBar userDetails={data} />
+        <NavigationBar userDetails={data} token={jwtCookie?.value ?? ""} />
       </div>
       <div className="w-full mt-16 p-4"></div>
     </div>
