@@ -43,8 +43,14 @@ function SignInForm() {
   const handleSignIn = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(SIGNIN_URL, values);
-      const data = res.data;
+      const res = await fetch(SIGNIN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await res.json();
       if (data.isError === true) {
         setSignInError("Invalid username or password.");
       } else {

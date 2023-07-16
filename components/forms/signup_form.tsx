@@ -102,8 +102,14 @@ function SignUpForm() {
     };
 
     try {
-      const res = await axios.post(REGISTER_URL, payload);
-      const data = res.data;
+      const res = await fetch(REGISTER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
 
       if (data.isError === true) {
         setSignUpError(data.message);
