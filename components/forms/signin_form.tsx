@@ -48,6 +48,7 @@ function SignInForm() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(values),
       });
       const data = await res.json();
