@@ -31,7 +31,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { User } from "@/lib/types/user.types";
+import { User, fullName } from "@/lib/types/user.types";
 import { SIGNOUT_URL } from "@/lib/constants/api_constants";
 import { cookies } from "next/dist/client/components/headers";
 import { useRouter } from "next/navigation";
@@ -43,10 +43,6 @@ function NavigationBar({
   userDetails: User;
   token: string;
 }) {
-  interface fullName {
-    name: string;
-  }
-
   const name: fullName = {
     name:
       userDetails?.personalInformation.name.first +
