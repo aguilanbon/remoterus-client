@@ -31,8 +31,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { User } from "@/lib/types/user.types";
+import { Label } from "@radix-ui/react-label";
 
-function NavigationBar() {
+function NavigationBar({ userDetails }: { userDetails: User }) {
+  interface fullName {
+    name: string;
+  }
+
+  const name: fullName = {
+    name:
+      userDetails?.personalInformation.name.first +
+      " " +
+      userDetails?.personalInformation.name.last,
+  };
+
   return (
     <div className="w-full h-16 flex p-4">
       <div className="w-full flex items-center justify-start">
@@ -82,7 +95,10 @@ function NavigationBar() {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>Your Name</DropdownMenuLabel>
+            <DropdownMenuLabel>
+              {name.name}{" "}
+              <span className="opacity-50">{`@${userDetails.username}`}</span>
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="cursor-pointer">
               Profile
