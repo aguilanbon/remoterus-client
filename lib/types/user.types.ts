@@ -1,4 +1,5 @@
 export interface User {
+  accessToken: string;
   personalInformation: {
     name: {
       first: string;

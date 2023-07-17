@@ -36,13 +36,7 @@ import { SIGNOUT_URL } from "@/lib/constants/api_constants";
 import { cookies } from "next/dist/client/components/headers";
 import { useRouter } from "next/navigation";
 
-function NavigationBar({
-  userDetails,
-  token,
-}: {
-  userDetails: User;
-  token: string;
-}) {
+function NavigationBar({ userDetails }: { userDetails: User }) {
   const name: fullName = {
     name:
       userDetails?.personalInformation.name.first +
@@ -57,7 +51,7 @@ function NavigationBar({
       method: "POST",
       credentials: "include",
       headers: {
-        Cookie: `jwt=${token}`,
+        Cookie: `jwt=${userDetails.accessToken}`,
       },
     });
     router.push("/");
