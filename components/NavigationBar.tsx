@@ -36,27 +36,26 @@ import { SIGNOUT_URL } from "@/lib/constants/api_constants";
 import { cookies } from "next/dist/client/components/headers";
 import { useRouter } from "next/navigation";
 
-function NavigationBar() {
-// { userDetails }: { userDetails: User }
-  // const name: fullName = {
-  //   name:
-  //     userDetails?.personalInformation.name.first +
-  //     " " +
-  //     userDetails?.personalInformation.name.last,
-  // };
+function NavigationBar({ userDetails }: { userDetails: User }) {
+  const router = useRouter();
+  const name: fullName = {
+    name:
+      userDetails?.personalInformation.name.first +
+      " " +
+      userDetails?.personalInformation.name.last,
+  };
 
-  // const router = useRouter();
-
-  // const handleLogout = async () => {
-  //   await fetch(SIGNOUT_URL, {
-  //     method: "POST",
-  //     credentials: "include",
-  //     headers: {
-  //       Cookie: `jwt=${userDetails.accessToken}`,
-  //     },
-  //   });
-  //   router.push("/");
-  // };
+  const handleLogout = async () => {
+    await fetch(SIGNOUT_URL, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Cookie: `jwt=${userDetails.accessToken}`,
+      },
+    });
+    router.push("/");
+    router.refresh();
+  };
 
   return (
     <div className="w-full h-16 flex p-4">
@@ -108,9 +107,9 @@ function NavigationBar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>
-              Your Name
-              {/* {name.name}{" "}
-              <span className="opacity-50">{`@${userDetails.username}`}</span> */}
+              {/* Your Name */}
+              {name.name}{" "}
+              <span className="opacity-50">{`@${userDetails.username}`}</span>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="cursor-pointer">
@@ -120,7 +119,7 @@ function NavigationBar() {
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>
