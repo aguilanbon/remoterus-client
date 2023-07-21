@@ -2,7 +2,6 @@ import NavigationBar from "@/components/NavigationBar";
 import { USER_PROFILE_URL } from "@/lib/constants/api_constants";
 import { User } from "@/lib/types/user.types";
 import { cookies } from "next/dist/client/components/headers";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 async function getUserProfile() {
@@ -19,8 +18,11 @@ async function getUserProfile() {
     ...data.data,
     accessToken: jwtCookie?.value,
   };
-
-  return userData;
+  if (res.ok) {
+    return userData;
+  } else {
+    throw new Error("Auth is required to access this page.");
+  }
 }
 
 async function HomePage() {
