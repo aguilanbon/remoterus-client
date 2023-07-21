@@ -19,7 +19,6 @@ import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { errorText } from "../customui/form_error";
 import Spinner from "../customui/spinner";
-import axios from "axios";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),

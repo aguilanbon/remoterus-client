@@ -33,16 +33,16 @@ import {
 } from "@/components/ui/dialog";
 import { User, fullName } from "@/lib/types/user.types";
 import { SIGNOUT_URL } from "@/lib/constants/api_constants";
-import { cookies } from "next/dist/client/components/headers";
 import { useRouter } from "next/navigation";
 
 function NavigationBar({ userDetails }: { userDetails: User }) {
   const router = useRouter();
+
   const name: fullName = {
     name:
-      userDetails?.personalInformation.name.first +
+      userDetails?.personalInformation?.name.first +
       " " +
-      userDetails?.personalInformation.name.last,
+      userDetails?.personalInformation?.name.last,
   };
 
   const handleLogout = async () => {
@@ -109,7 +109,7 @@ function NavigationBar({ userDetails }: { userDetails: User }) {
             <DropdownMenuLabel>
               {/* Your Name */}
               {name.name}{" "}
-              <span className="opacity-50">{`@${userDetails.username}`}</span>
+              <span className="opacity-50">{`@${userDetails?.username}`}</span>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="cursor-pointer">
