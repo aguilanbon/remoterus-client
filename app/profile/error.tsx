@@ -19,7 +19,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center text-center">
       <h2 className="text-2xl mb-4 text-green-300">There was a problem!</h2>
       <h1 className="text-6xl mb-6 text-white font-bold">{error.message}</h1>
       <p className="text-xl mb-16 text-slate-500 font-bold">
