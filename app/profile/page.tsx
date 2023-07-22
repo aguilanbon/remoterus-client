@@ -12,6 +12,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  ActivityLogIcon,
+  BackpackIcon,
+  GearIcon,
+  PersonIcon,
+} from "@radix-ui/react-icons";
 
 async function getUserProfile() {
   const nextCookie = cookies();
@@ -49,8 +56,8 @@ async function ProfilePage() {
       </div>
       <div className="w-3/4 mt-16 p-4">
         <section className="w-1/4 flex items-center justify-center flex-col">
-          <Card>
-            <CardHeader>
+          <Card className="bg-primary text-white outline-none border-none w-[300px]">
+            <CardHeader className="flex items-center justify-center">
               <Avatar className="w-36 h-36">
                 <AvatarImage
                   src="https://github.com/shadcn.png"
@@ -61,7 +68,35 @@ async function ProfilePage() {
             </CardHeader>
             <CardContent className="w-full flex items-center justify-center flex-col">
               <h1 className="text-lg font-semibold">{name.name}</h1>
-              <CardDescription>Position</CardDescription>
+              <CardDescription className="mb-4">Position</CardDescription>
+              <Button
+                variant={"ghost"}
+                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+              >
+                <ActivityLogIcon className="mr-2" />
+                Feed
+              </Button>
+              <Button
+                variant={"ghost"}
+                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+              >
+                <BackpackIcon className="mr-2" />
+                Jobs
+              </Button>
+              <Button
+                variant={"ghost"}
+                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+              >
+                <PersonIcon className="mr-2" />
+                Account Details
+              </Button>
+              <Button
+                variant={"ghost"}
+                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+              >
+                <GearIcon className="mr-2" />
+                Settings
+              </Button>
             </CardContent>
           </Card>
         </section>
