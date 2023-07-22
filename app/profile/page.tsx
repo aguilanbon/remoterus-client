@@ -19,6 +19,7 @@ import {
   GearIcon,
   PersonIcon,
 } from "@radix-ui/react-icons";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 async function getUserProfile() {
   const nextCookie = cookies();
@@ -69,34 +70,42 @@ async function ProfilePage() {
             <CardContent className="w-full flex items-center justify-center flex-col">
               <h1 className="text-lg font-semibold">{name.name}</h1>
               <CardDescription className="mb-4">Position</CardDescription>
-              <Button
-                variant={"ghost"}
-                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
-              >
-                <ActivityLogIcon className="mr-2" />
-                Feed
-              </Button>
-              <Button
-                variant={"ghost"}
-                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
-              >
-                <BackpackIcon className="mr-2" />
-                Jobs
-              </Button>
-              <Button
-                variant={"ghost"}
-                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
-              >
-                <PersonIcon className="mr-2" />
-                Account Details
-              </Button>
-              <Button
-                variant={"ghost"}
-                className="w-full mb-2 border border-slate-800 flex items-start justify-start"
-              >
-                <GearIcon className="mr-2" />
-                Settings
-              </Button>
+              <Tabs defaultValue="feed" className="w-full">
+                <TabsList className="w-full h-full flex flex-col space-y-4 bg-primary">
+                  <TabsTrigger
+                    value="feed"
+                    className="w-full flex items-center justify-start text-md"
+                  >
+                    <ActivityLogIcon className="mr-2" />
+                    Feed
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="jobs"
+                    className="w-full flex items-center justify-start text-md"
+                  >
+                    <BackpackIcon className="mr-2" />
+                    Jobs
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="account"
+                    className="w-full flex items-center justify-start text-md"
+                  >
+                    <PersonIcon className="mr-2" />
+                    Account Details
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="settings"
+                    className="w-full flex items-center justify-start text-md"
+                  >
+                    <GearIcon className="mr-2" />
+                    Settings
+                  </TabsTrigger>
+                </TabsList>
+                <CardContent>
+                  <TabsContent value="signin"></TabsContent>
+                  <TabsContent value="signup"></TabsContent>
+                </CardContent>
+              </Tabs>
             </CardContent>
           </Card>
         </section>
@@ -107,3 +116,32 @@ async function ProfilePage() {
 }
 
 export default ProfilePage;
+
+//  <Button
+//                 variant={"ghost"}
+//                 className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+//               >
+//                 <ActivityLogIcon className="mr-2" />
+//                 Feed
+//               </Button>
+//               <Button
+//                 variant={"ghost"}
+//                 className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+//               >
+//                 <BackpackIcon className="mr-2" />
+//                 Jobs
+//               </Button>
+//               <Button
+//                 variant={"ghost"}
+//                 className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+//               >
+//                 <PersonIcon className="mr-2" />
+//                 Account Details
+//               </Button>
+//               <Button
+//                 variant={"ghost"}
+//                 className="w-full mb-2 border border-slate-800 flex items-start justify-start"
+//               >
+//                 <GearIcon className="mr-2" />
+//                 Settings
+//               </Button>
