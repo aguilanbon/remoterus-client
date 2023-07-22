@@ -1,6 +1,7 @@
 "use client"; // Error components must be Client Components
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -25,7 +26,7 @@ export default function Error({
       <p className="text-xl mb-16 text-slate-500 font-bold">
         Invalid access token! Please try signing in again.
       </p>
-      <Button
+      {/* <Button
         variant={"outline"}
         onClick={
           // Attempt to recover by trying to re-render the segment
@@ -33,7 +34,13 @@ export default function Error({
         }
       >
         Go back to sign in page
-      </Button>
+      </Button> */}
+      <Link
+        className="border-2 bg-white rounded-md py-2 px-4 text-sm hover:bg-slate-200 duration-150 transition-colors"
+        href={"/"}
+      >
+        Go back to Sign in Page
+      </Link>
     </div>
   );
 }
