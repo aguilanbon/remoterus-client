@@ -16,9 +16,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { SIGNIN_URL } from "@/lib/constants/api_constants";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
 import { errorText } from "../customui/form_error";
 import Spinner from "../customui/spinner";
+import { toast } from "react-hot-toast";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -29,7 +29,6 @@ function SignInForm() {
   const [signInError, setSignInError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,21 +56,18 @@ function SignInForm() {
         router.push("/home");
         form.reset();
         setSignInError("");
-        toast({
-          duration: 5000,
-          variant: "default",
-          title: "Success!",
-          description: "Welcome back! What's up?",
+        toast.success("Success! What's up", {
+          position: "bottom-right",
         });
       }
       setIsLoading(false);
     } catch (error) {
-      toast({
-        duration: 5000,
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-      });
+      toast.error(
+        "Uh oh! Something went wrong. There was a problem with your request.",
+        {
+          position: "bottom-right",
+        }
+      );
       setIsLoading(false);
     }
   };

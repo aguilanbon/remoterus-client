@@ -116,14 +116,8 @@ function SignUpForm() {
         form.reset();
         setSignUpError("");
         toast.success("Success! you may now sign in", {
-          position: "top-right",
+          position: "bottom-right",
         });
-        // toast({
-        //   duration: 5000,
-        //   variant: "default",
-        //   title: "Success!",
-        //   description: "Welcome back! What's up?",
-        // });
       }
       setIsLoading(false);
     } catch (error) {
