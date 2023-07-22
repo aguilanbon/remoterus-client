@@ -20,6 +20,8 @@ import {
   PersonIcon,
 } from "@radix-ui/react-icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import { EditIcon } from "lucide-react";
 
 async function getUserProfile() {
   const nextCookie = cookies();
@@ -107,12 +109,19 @@ async function ProfilePage() {
           </section>
           <section className="w-full flex items-center justify-start flex-col">
             <Card className="bg-alt-black text-white outline-none border-none w-full p-4 shadow-lg">
-              <CardContent>
-                <TabsContent value="feed">feed</TabsContent>
-                <TabsContent value="jobs">jobs</TabsContent>
-                <TabsContent value="account">account</TabsContent>
-                <TabsContent value="settings">settings</TabsContent>
-              </CardContent>
+              <TabsContent value="feed">feed</TabsContent>
+              <TabsContent value="jobs">jobs</TabsContent>
+              <TabsContent value="account">
+                <CardContent>
+                  <div className="w-full flex justify-between">
+                    <h1 className="text-2xl">Account Details</h1>
+                    <EditIcon />
+                  </div>
+                  <Separator />
+                  <div className="mt-6">{name.name}</div>
+                </CardContent>
+              </TabsContent>
+              <TabsContent value="settings">settings</TabsContent>
             </Card>
           </section>
         </Tabs>
