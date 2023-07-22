@@ -34,6 +34,7 @@ import {
 import { User, fullName } from "@/lib/types/user.types";
 import { SIGNOUT_URL } from "@/lib/constants/api_constants";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function NavigationBar({ userDetails }: { userDetails: User }) {
   const router = useRouter();
@@ -112,9 +113,12 @@ function NavigationBar({ userDetails }: { userDetails: User }) {
               <span className="opacity-50">{`@${userDetails?.username}`}</span>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
-              Profile
-            </DropdownMenuItem>
+            <Link href={"/profile"}>
+              <DropdownMenuItem className="cursor-pointer">
+                Profile
+              </DropdownMenuItem>
+            </Link>
+
             <DropdownMenuItem className="cursor-pointer">
               Settings
             </DropdownMenuItem>
