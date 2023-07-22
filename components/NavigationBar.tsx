@@ -61,7 +61,9 @@ function NavigationBar({ userDetails }: { userDetails: User }) {
   return (
     <div className="w-full h-16 flex p-4">
       <div className="w-full flex items-center justify-start">
-        <RocketIcon className="h-8 w-8 text-white" />
+        <Link href={"/home"}>
+          <RocketIcon className="h-8 w-8 text-white" />
+        </Link>
       </div>
       <div className="w-full flex items-center justify-center">
         <GlobalSearch />
