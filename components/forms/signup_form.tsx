@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
 import { errorText } from "../customui/form_error";
 import { Separator } from "../ui/separator";
 import {
@@ -31,7 +30,7 @@ import { format } from "date-fns";
 import { SignUpProps } from "@/lib/types/form.types";
 import { REGISTER_URL } from "@/lib/constants/api_constants";
 import Spinner from "../customui/spinner";
-import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const formSchema = z
   .object({
@@ -116,6 +115,15 @@ function SignUpForm() {
       } else {
         form.reset();
         setSignUpError("");
+        toast.success("Success! you may now sign in", {
+          position: "top-right",
+        });
+        // toast({
+        //   duration: 5000,
+        //   variant: "default",
+        //   title: "Success!",
+        //   description: "Welcome back! What's up?",
+        // });
       }
       setIsLoading(false);
     } catch (error) {
