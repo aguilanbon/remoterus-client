@@ -55,22 +55,22 @@ async function ProfilePage() {
       <div className="w-full fixed">
         <NavigationBar userDetails={data} />
       </div>
-      <div className="w-3/4 mt-16 p-4">
-        <section className="w-1/4 flex items-center justify-center flex-col">
-          <Card className="bg-primary text-white outline-none border-none w-[300px]">
-            <CardHeader className="flex items-center justify-center">
-              <Avatar className="w-36 h-36">
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </CardHeader>
-            <CardContent className="w-full flex items-center justify-center flex-col">
-              <h1 className="text-lg font-semibold">{name.name}</h1>
-              <CardDescription className="mb-4">Position</CardDescription>
-              <Tabs defaultValue="feed" className="w-full">
+      <div className="w-3/4 mt-16 p-4 flex">
+        <Tabs defaultValue="feed" className="w-full flex">
+          <section className="w-1/4 flex items-center justify-center flex-col mr-4">
+            <Card className="bg-primary text-white outline-none border-none w-[300px]">
+              <CardHeader className="flex items-center justify-center">
+                <Avatar className="w-36 h-36">
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </CardHeader>
+              <CardContent className="w-full flex items-center justify-center flex-col">
+                <h1 className="text-lg font-semibold">{name.name}</h1>
+                <CardDescription className="mb-4">Position</CardDescription>
                 <TabsList className="w-full h-full flex flex-col space-y-4 bg-primary">
                   <TabsTrigger
                     value="feed"
@@ -101,15 +101,21 @@ async function ProfilePage() {
                     Settings
                   </TabsTrigger>
                 </TabsList>
-                <CardContent>
-                  <TabsContent value="signin"></TabsContent>
-                  <TabsContent value="signup"></TabsContent>
-                </CardContent>
-              </Tabs>
-            </CardContent>
-          </Card>
-        </section>
-        <section></section>
+                <CardContent></CardContent>
+              </CardContent>
+            </Card>
+          </section>
+          <section className="w-full flex items-center justify-start flex-col">
+            <Card className="bg-alt-black text-white outline-none border-none w-full p-4 shadow-lg">
+              <CardContent>
+                <TabsContent value="feed">feed</TabsContent>
+                <TabsContent value="jobs">jobs</TabsContent>
+                <TabsContent value="account">account</TabsContent>
+                <TabsContent value="settings">settings</TabsContent>
+              </CardContent>
+            </Card>
+          </section>
+        </Tabs>
       </div>
     </div>
   );
