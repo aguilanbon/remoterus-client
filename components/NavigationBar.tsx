@@ -118,7 +118,6 @@ function NavigationBar({ userDetails }: { userDetails: User }) {
                 Profile
               </DropdownMenuItem>
             </Link>
-
             <DropdownMenuItem className="cursor-pointer">
               Settings
             </DropdownMenuItem>
