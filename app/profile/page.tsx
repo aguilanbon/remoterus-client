@@ -22,6 +22,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { EditIcon } from "lucide-react";
+import AccountDetails from "@/components/profile/account_details";
 
 async function getUserProfile() {
   const nextCookie = cookies();
@@ -112,14 +113,7 @@ async function ProfilePage() {
               <TabsContent value="feed">feed</TabsContent>
               <TabsContent value="jobs">jobs</TabsContent>
               <TabsContent value="account">
-                <CardContent>
-                  <div className="w-full flex justify-between">
-                    <h1 className="text-2xl">Account Details</h1>
-                    <EditIcon />
-                  </div>
-                  <Separator />
-                  <div className="mt-6">{name.name}</div>
-                </CardContent>
+                <AccountDetails user={data} />
               </TabsContent>
               <TabsContent value="settings">settings</TabsContent>
             </Card>
