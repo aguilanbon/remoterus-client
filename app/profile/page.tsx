@@ -20,8 +20,6 @@ import {
   PersonIcon,
 } from "@radix-ui/react-icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { EditIcon } from "lucide-react";
 import AccountDetails from "@/components/profile/account_details";
 
 async function getUserProfile() {
@@ -60,7 +58,7 @@ async function ProfilePage() {
       </div>
       <div className="w-3/4 mt-16 p-4 flex">
         <Tabs defaultValue="feed" className="w-full flex">
-          <section className="w-1/4 flex items-center justify-center flex-col mr-4">
+          <section className="w-1/4 flex items-center justify-start flex-col mr-4">
             <Card className="bg-primary text-white outline-none border-none w-[300px]">
               <CardHeader className="flex items-center justify-center">
                 <Avatar className="w-36 h-36">
