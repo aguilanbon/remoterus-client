@@ -18,8 +18,15 @@ function AccountDetails({ user }: { user: User }) {
   return (
     <CardContent>
       <div className="w-full flex justify-between">
-        <h1 className="text-2xl">Account Details</h1>
-        <EditIcon />
+        <div className="w-full flex justify-between py-2">
+          <h1 className="text-2xl">Account Details</h1>
+          <div className="">
+            <EditIcon
+              className="w-8 h-8 p-2 rounded-full bg-green-300 text-alt-black cursor-pointer hover:bg-green-400"
+              aria-label="Edit profile"
+            />
+          </div>
+        </div>
       </div>
       <Separator />
       <div className="mt-6">
