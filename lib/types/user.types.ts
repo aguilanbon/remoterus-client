@@ -12,7 +12,7 @@ export interface User {
       zipcode: string;
       country: string;
     };
-    mobileNo: string;
+    mobileNo: number;
     birthdate: string;
   };
   _id: string;
