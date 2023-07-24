@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { useAtom } from "jotai";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -48,16 +49,16 @@ function AccountDetails({ user }: { user: User }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: user.username,
-      firstName: user.personalInformation.name.first,
-      lastName: user.personalInformation.name.last,
-      birthdate: new Date(user.personalInformation.birthdate),
-      mobile: user.personalInformation.mobileNo,
-      street: user.personalInformation.address.street,
-      city: user.personalInformation.address.city,
-      state: user.personalInformation.address.state,
-      zipcode: user.personalInformation.address.zipcode,
-      country: user.personalInformation.address.country,
+      username: user?.username,
+      firstName: user?.personalInformation?.name.first,
+      lastName: user?.personalInformation?.name.last,
+      birthdate: new Date(user?.personalInformation?.birthdate),
+      mobile: user?.personalInformation?.mobileNo,
+      street: user?.personalInformation?.address?.street,
+      city: user?.personalInformation?.address?.city,
+      state: user?.personalInformation?.address?.state,
+      zipcode: user?.personalInformation?.address?.zipcode,
+      country: user?.personalInformation?.address?.country,
     },
   });
 
@@ -92,32 +93,36 @@ function AccountDetails({ user }: { user: User }) {
       {!isEditForm ? (
         <div className="mt-6">
           <h2 className="text-lg text-slate-400 text-muted">Username</h2>
-          <h3 className="text-xl mb-4">{user.username}</h3>
+          <h3 className="text-xl mb-4">{user?.username}</h3>
           <h2 className="text-lg text-slate-400 text-muted">First name</h2>
           <h3 className="text-xl mb-4">
-            {user.personalInformation.name.first}
+            {user?.personalInformation?.name.first}
           </h3>
           <h2 className="text-lg text-slate-400 text-muted">Last name</h2>
-          <h3 className="text-xl mb-4">{user.personalInformation.name.last}</h3>
+          <h3 className="text-xl mb-4">
+            {user?.personalInformation?.name.last}
+          </h3>
           <h2 className="text-lg text-slate-400 text-muted">Birth date</h2>
           <h3 className="text-xl mb-4">{formattedDate}</h3>
           <h2 className="text-lg text-slate-400 text-muted">Mobile No.</h2>
-          <h3 className="text-xl mb-4">{user.personalInformation.mobileNo}</h3>
+          <h3 className="text-xl mb-4">
+            {user?.personalInformation?.mobileNo}
+          </h3>
           <h2 className="text-lg text-slate-400 text-muted">Street</h2>
           <h3 className="text-xl mb-4">
-            {user.personalInformation.address.street ?? "N/A"}
+            {user?.personalInformation?.address?.street ?? "N/A"}
           </h3>
           <h2 className="text-lg text-slate-400 text-muted">State</h2>
           <h3 className="text-xl mb-4">
-            {user.personalInformation.address.state ?? "N/A"}
+            {user?.personalInformation?.address?.state ?? "N/A"}
           </h3>
           <h2 className="text-lg text-slate-400 text-muted">Zipcode</h2>
           <h3 className="text-xl mb-4">
-            {user.personalInformation.address.zipcode ?? "N/A"}
+            {user?.personalInformation?.address?.zipcode ?? "N/A"}
           </h3>
           <h2 className="text-lg text-slate-400 text-muted">Country</h2>
           <h3 className="text-xl mb-4">
-            {user.personalInformation.address.country ?? "N/A"}
+            {user?.personalInformation?.address?.country ?? "N/A"}
           </h3>
         </div>
       ) : (
