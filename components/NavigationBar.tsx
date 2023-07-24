@@ -68,7 +68,7 @@ function NavigationBar() {
       method: "POST",
       credentials: "include",
       headers: {
-        Authorization: `Bearer ${jwt}`,
+        Cookie: `jwt=${jwt}`,
       },
     });
     router.push("/");

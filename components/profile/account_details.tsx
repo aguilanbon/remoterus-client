@@ -30,6 +30,8 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useAtom } from "jotai";
 import { userAtom } from "@/lib/store/user.store";
+import useSWR from "swr";
+import { USER_PROFILE_URL } from "@/lib/constants/api_constants";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -43,10 +45,25 @@ const formSchema = z.object({
   zipcode: z.string(),
   country: z.string(),
 });
-
+const fetcher = (url: RequestInfo | URL, jwt: String) =>
+  fetch(url, {
+    credentials: "include",
+    headers: {
+      // Cookie: `jwt=${jwt}`,
+      Authorization: `Bearer ${jwt}`,
+    },
+  }).then((r) => r.json());
 function AccountDetails() {
   const [isEditForm, setIsEditForm] = useState(false);
   const [user] = useAtom(userAtom);
+
+  const jwt = user?.authentication.accessToken;
+
+  const { data } = useSWR([USER_PROFILE_URL, jwt], ([url, jwt]) =>
+    fetcher(url, jwt ?? "token")
+  );
+
+  console.log(data);
 
   const userBday = user?.personalInformation.birthdate;
 
