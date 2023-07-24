@@ -29,6 +29,7 @@ import {
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useAtom } from "jotai";
+import { userAtom } from "@/lib/store/user.store";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -43,8 +44,11 @@ const formSchema = z.object({
   country: z.string(),
 });
 
-function AccountDetails({ user }: { user: User }) {
+function AccountDetails() {
   const [isEditForm, setIsEditForm] = useState(false);
+  const [user] = useAtom(userAtom);
+
+  const userBday = user?.personalInformation.birthdate;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,7 +56,7 @@ function AccountDetails({ user }: { user: User }) {
       username: user?.username,
       firstName: user?.personalInformation?.name.first,
       lastName: user?.personalInformation?.name.last,
-      birthdate: new Date(user?.personalInformation?.birthdate),
+      birthdate: new Date(Date.parse(userBday!)),
       mobile: user?.personalInformation?.mobileNo,
       street: user?.personalInformation?.address?.street,
       city: user?.personalInformation?.address?.city,
@@ -69,7 +73,7 @@ function AccountDetails({ user }: { user: User }) {
     toDate.getDate()
   );
 
-  const date = new Date(Date.parse(user.personalInformation.birthdate));
+  const date = new Date(Date.parse(userBday!));
   let formattedDate = date.toLocaleDateString("en-US", {
     month: "short",
     day: "2-digit",
