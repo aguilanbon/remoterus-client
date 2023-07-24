@@ -1,5 +1,7 @@
 export interface User {
-  accessToken: string;
+  authentication: {
+    accessToken: string;
+  };
   personalInformation: {
     name: {
       first: string;
