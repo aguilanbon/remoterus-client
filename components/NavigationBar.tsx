@@ -32,11 +32,28 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { User, fullName } from "@/lib/types/user.types";
-import { SIGNOUT_URL } from "@/lib/constants/api_constants";
+import { SIGNOUT_URL, USER_PROFILE_URL } from "@/lib/constants/api_constants";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import useSWR from "swr";
+import { useAtom } from "jotai";
+import { userAtom } from "@/lib/store/user.store";
 
-function NavigationBar({ userDetails }: { userDetails: User }) {
+const fetcher = (url: RequestInfo | URL, jwt: String) =>
+  fetch(url, {
+    credentials: "include",
+    headers: {
+      Cookie: `jwt=${jwt}`,
+    },
+  }).then((r) => r.json());
+
+function NavigationBar() {
+  const [userDetails] = useAtom(userAtom);
+  const jwt = userDetails?.authentication.accessToken;
+  const { data } = useSWR([USER_PROFILE_URL, jwt], ([url, jwt]) =>
+    fetcher(url, jwt ?? "token")
+  );
+
   const router = useRouter();
 
   const name: fullName = {
@@ -51,7 +68,7 @@ function NavigationBar({ userDetails }: { userDetails: User }) {
       method: "POST",
       credentials: "include",
       headers: {
-        Cookie: `jwt=${userDetails.accessToken}`,
+        Cookie: `jwt=${userDetails?.authentication.accessToken}`,
       },
     });
     router.push("/");
