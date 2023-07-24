@@ -1,6 +1,7 @@
 import NavigationBar from "@/components/NavigationBar";
 import { USER_PROFILE_URL } from "@/lib/constants/api_constants";
 import { User } from "@/lib/types/user.types";
+import { useAtom } from "jotai";
 import { cookies } from "next/dist/client/components/headers";
 import React from "react";
 
@@ -16,7 +17,6 @@ async function getUserProfile() {
   const data = await res.json();
   const userData: User = {
     ...data.data,
-    accessToken: jwtCookie?.value,
   };
   if (res.ok) {
     return userData;
