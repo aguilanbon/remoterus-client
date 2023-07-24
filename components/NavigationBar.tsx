@@ -39,20 +39,20 @@ import useSWR from "swr";
 import { useAtom } from "jotai";
 import { userAtom } from "@/lib/store/user.store";
 
-const fetcher = (url: RequestInfo | URL, jwt: String) =>
-  fetch(url, {
-    credentials: "include",
-    headers: {
-      Cookie: `jwt=${jwt}`,
-    },
-  }).then((r) => r.json());
+// const fetcher = (url: RequestInfo | URL, jwt: String) =>
+//   fetch(url, {
+//     credentials: "include",
+//     headers: {
+//       Cookie: `jwt=${jwt}`,
+//     },
+//   }).then((r) => r.json());
 
 function NavigationBar() {
   const [userDetails] = useAtom(userAtom);
   const jwt = userDetails?.authentication.accessToken;
-  const { data } = useSWR([USER_PROFILE_URL, jwt], ([url, jwt]) =>
-    fetcher(url, jwt ?? "token")
-  );
+  // const { data } = useSWR([USER_PROFILE_URL, jwt], ([url, jwt]) =>
+  //   fetcher(url, jwt ?? "token")
+  // );
 
   const router = useRouter();
 
@@ -68,7 +68,7 @@ function NavigationBar() {
       method: "POST",
       credentials: "include",
       headers: {
-        Cookie: `jwt=${userDetails?.authentication.accessToken}`,
+        Authorization: `Bearer ${jwt}`,
       },
     });
     router.push("/");
