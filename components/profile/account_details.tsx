@@ -29,7 +29,7 @@ import {
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useAtom } from "jotai";
-import { userAtom } from "@/lib/store/user.store";
+import { strAtomWithPersistence, userAtom } from "@/lib/store/user.store";
 import useSWR from "swr";
 import { USER_PROFILE_URL } from "@/lib/constants/api_constants";
 
@@ -55,7 +55,7 @@ const fetcher = (url: RequestInfo | URL, jwt: String) =>
   }).then((r) => r.json());
 function AccountDetails() {
   const [isEditForm, setIsEditForm] = useState(false);
-  const [user] = useAtom(userAtom);
+  const [user] = useAtom(strAtomWithPersistence);
 
   const jwt = user?.authentication.accessToken;
 

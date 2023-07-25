@@ -20,7 +20,7 @@ import { errorText } from "../customui/form_error";
 import Spinner from "../customui/spinner";
 import { toast } from "react-hot-toast";
 import { useAtom } from "jotai";
-import { userAtom } from "@/lib/store/user.store";
+import { strAtomWithPersistence, userAtom } from "@/lib/store/user.store";
 
 const formSchema = z.object({
   username: z.string().nonempty({ message: "Username must not be empty." }),
@@ -30,7 +30,7 @@ const formSchema = z.object({
 function SignInForm() {
   const [signInError, setSignInError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useAtom(userAtom);
+  const [currentUser, setCurrentUser] = useAtom(strAtomWithPersistence);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({

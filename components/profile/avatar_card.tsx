@@ -10,11 +10,11 @@ import {
   PersonIcon,
 } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
-import { userAtom } from "@/lib/store/user.store";
+import { strAtomWithPersistence, userAtom } from "@/lib/store/user.store";
 import { fullName } from "@/lib/types/user.types";
 
 function AvatarCard() {
-  const [user] = useAtom(userAtom);
+  const [user] = useAtom(strAtomWithPersistence);
 
   const name: fullName = {
     name:
